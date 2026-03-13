@@ -38,7 +38,7 @@ $(document).ready(function () {
             url: API_URL,
             method: "GET",
             data: {
-                action: "getProducts"
+                action: "getServices"
             },
             success: function (response) {
 
