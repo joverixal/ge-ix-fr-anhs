@@ -1,308 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>POS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="manifest.json">
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(() => console.log('Service Worker registered'))
-      .catch(err => console.error('SW registration failed:', err));
-  }
-  </script>
+<title>Rixal POS</title>
 
-  <link rel="icon" type="image/png" href="assets/images/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#E41200">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="assets/images/logo.png">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <!-- Toastr CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
 
-  <style>
-    /* Bottom nav button style */
-    .bottom-nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      color: #6c757d;
-      font-size: 0.85rem;
-    }
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="assets/vendor/bootstrap-icons.css">
 
-    .bottom-nav a.active {
-      color: #28a745; /* Active page color */
-    }
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="assets/vendor/toastr.min.css">
 
-    .bottom-nav i {
-      font-size: 1.5rem;
-      margin-bottom: 0.2rem;
-    }
+<style>
 
-    #div-added-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      
-      /* Always use max-height based on ~3 items */
-      max-height: 230px; /* adjust depending on your item height */
-      overflow-y: auto;
-      padding-right: 0.25rem; /* optional for scrollbar */
-    }
+:root{
+--primary:#E41200;
+--secondary:#FFA600;
+}
 
-    #div-added-items::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    #div-added-items::-webkit-scrollbar-thumb {
-      background-color: rgba(0,0,0,0.2);
-      border-radius: 3px;
-    }
+.form-control:focus,
+.form-select:focus{
+border-color: var(--secondary);
+box-shadow: 0 0 0 0.2rem rgba(255,166,0,0.25);
+}
 
-    :root{
-      --primary:#E41200;
-      --secondary:#FFA600;
-    }
-    
-    /* Inputs focus like login page */
-    .form-control:focus,
-    .form-select:focus{
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 0.2rem rgba(255,166,0,0.25);
-    }
-    
-    /* Amount Due */
-    #inp-amount-due{
-      color: var(--primary) !important;
-    }
-    
-    /* Cash Button */
-    #btn-cash{
-      background: var(--secondary);
-      border:none;
-      font-weight:600;
-    }
-    
-    #btn-cash:hover{
-      background:#e69500;
-    }
-    
-    /* Credit Button */
-    #btn-credit{
-      background:#6c757d;
-    }
-    
-    /* Add item button */
-    #btn-add-item{
-      background:var(--secondary);
-      border:none;
-    }
-    
-    /* Bottom nav */
-    .bottom-nav a{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding:0.5rem;
-      color:#6c757d;
-      font-size:0.85rem;
-    }
-    
-    .bottom-nav a.active{
-      color:var(--primary);
-    }
-    
-    .bottom-nav i{
-      font-size:1.5rem;
-      margin-bottom:0.2rem;
-    }
-    
-    /* Added items scroll */
-    #div-added-items{
-      display:flex;
-      flex-direction:column;
-      gap:0.5rem;
-      max-height:230px;
-      overflow-y:auto;
-      padding-right:0.25rem;
-    }
-    
-    #div-added-items::-webkit-scrollbar{
-      width:6px;
-    }
-    
-    #div-added-items::-webkit-scrollbar-thumb{
-      background-color:rgba(0,0,0,0.2);
-      border-radius:3px;
-    }
+#inp-amount-due{
+color: var(--primary) !important;
+}
 
-    #nav-logo img {
-      display: block;
-      margin: 0 auto;
-    }  
-    
-  </style>
+#btn-cash{
+background: var(--secondary);
+border:none;
+font-weight:600;
+}
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Toastr JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+#btn-cash:hover{
+background:#e69500;
+}
 
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/pos.js"></script>
+.bottom-nav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0.5rem;
+color:#6c757d;
+font-size:0.85rem;
+}
+
+.bottom-nav a.active{
+color:var(--primary);
+}
+
+.bottom-nav i{
+font-size:1.5rem;
+margin-bottom:0.2rem;
+}
+
+#div-added-items{
+display:flex;
+flex-direction:column;
+gap:0.5rem;
+max-height:230px;
+overflow-y:auto;
+}
+
+</style>
+
+<!-- jQuery -->
+<script src="assets/vendor/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+
+<!-- Toastr -->
+<script src="assets/vendor/toastr.min.js"></script>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/pos.js"></script>
+
 </head>
+
+
 <body>
 
 <div class="container py-3 mb-5">
-  
-  <select id="sel-products" class="form-select mb-3" disabled>
-    <option value="">Loading...</option>
-  </select>
 
-  <div class="mb-3">
-    
-  <div id="div-added-items"></div>
+<select id="sel-products" class="form-select mb-3" disabled>
+<option>Loading...</option>
+</select>
 
-  <!-- Amount Due -->
+<div id="div-added-items"></div>
+
 <div class="form-floating mb-3">
-  <input type="number"
-         id="inp-amount-due"
-         class="form-control text-center text-danger fw-bold"
-         style="font-size:1.5rem; height:60px;"
-         placeholder="0"
-         readonly disabled>
-  <label for="inp-amount-due">Amount Due</label>
-</div>
 
-  <!-- Cash Received with Clear Button -->
-  <div class="mb-3">
-    <label for="inp-cash-received" class="form-label fw-semibold">Cash Received</label>
-    <div class="input-group">
-      <input type="number"
-             id="inp-cash-received"
-             class="form-control"
-             placeholder="Enter cash received">
-      <button class="btn btn-outline-secondary"
-              type="button"
-              id="btn-clear-cash">
-        ✕
-      </button>
-    </div>
-  </div>
+<input type="number"
+id="inp-amount-due"
+class="form-control text-center fw-bold"
+style="font-size:1.5rem;height:60px;"
+readonly>
 
-  <!-- Changed -->
-  <div class="form-floating mb-3">
-    <input type="number"
-           id="inp-changed"
-           class="form-control"
-           placeholder="0"
-           readonly disabled>
-    <label for="inp-changed">Changed</label>
-  </div>
-</div>
-
-  <button id="btn-cash" class="btn btn-success w-100 mb-2">Cash</button>
-  <button id="btn-credit" class="btn btn-secondary w-100">Credit</button>
+<label>Amount Due</label>
 
 </div>
 
-<div class="modal fade" id="mdl-add-item">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<div class="mb-3">
 
-      <div class="modal-header">
-        <h5 id="lbl-item-title"></h5>
-      </div>
+<label class="form-label fw-semibold">Cash Received</label>
 
-      <div class="modal-body">
-        <div class="row mb-3">
-          <div class="col">
-            <label for="inp-stock-on-hand" class="form-label">Stock on Hand</label>
-            <input type="hidden" id="inp-id" class="form-control">
-            <input type="hidden" id="inp-unit-price" class="form-control">
-            <input type="hidden" id="inp-profit" class="form-control">
-            <input type="number" id="inp-stock-on-hand" class="form-control text-center" readonly disabled>
-          </div>
-          <div class="col">
-            <label for="inp-selling-price" class="form-label">Selling Price</label>
-            <input type="number" id="inp-selling-price" class="form-control text-center" readonly disabled>
-          </div>
-        </div>
+<div class="input-group">
 
-        <div class="row mb-3 align-items-center">
-          <label for="inp-quantity" class="form-label">Quantity</label>
-          <div class="input-group input-group-lg">
-            <button class="btn btn-outline-secondary btn-lg" type="button" id="btn-decrease">-</button>
-            <input type="number" id="inp-quantity" class="form-control text-center" 
-                   placeholder="Quantity" value="1" min="0.5" style="font-size:1.5rem; height:60px;" required>
-            <button class="btn btn-outline-secondary btn-lg" type="button" id="btn-increase">+</button>
-          </div>
-        </div>
-      </div>
+<input type="number"
+id="inp-cash-received"
+class="form-control">
 
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button id="btn-add-item" class="btn btn-primary">Add</button>
-      </div>
+<button class="btn btn-outline-secondary"
+type="button"
+id="btn-clear-cash">✕</button>
 
-    </div>
-  </div>
 </div>
 
-<!-- Bottom navigation menu with plain logo -->
-<!-- Bottom navigation menu with plain logo -->
+</div>
+
+<div class="form-floating mb-3">
+
+<input type="number"
+id="inp-changed"
+class="form-control"
+readonly>
+
+<label>Change</label>
+
+</div>
+
+<button id="btn-cash" class="btn w-100 mb-2">Cash</button>
+
+<button id="btn-credit" class="btn btn-secondary w-100">Credit</button>
+
+</div>
+
+
+<!-- Bottom Nav -->
+
 <nav class="navbar fixed-bottom bg-white border-top">
-  <div class="container d-flex justify-content-around bottom-nav align-items-center">
-    <a href="pos.html" class="text-decoration-none" id="nav-pos">
-      <i class="bi bi-cash-stack"></i>
-      POS
-    </a>
 
-    <a href="products.html" class="text-decoration-none" id="nav-products">
-      <i class="bi bi-box-seam"></i>
-      Products
-    </a>
+<div class="container d-flex justify-content-around bottom-nav">
 
-    <!-- Plain logo, not a link -->
-    <div id="nav-logo">
-      <img src="assets/images/logo.png" alt="Logo" style="height:40px; width:auto;">
-    </div>
+<a href="pos.html" id="nav-pos">
+<i class="bi bi-cash-stack"></i>
+POS
+</a>
 
-    <a href="sales.html" class="text-decoration-none" id="nav-sales">
-      <i class="bi bi-receipt"></i>
-      Sales
-    </a>
+<a href="products.html" id="nav-products">
+<i class="bi bi-box-seam"></i>
+Products
+</a>
 
-    <a href="#" class="text-decoration-none" id="nav-logout">
-      <i class="bi bi-box-arrow-right"></i>
-      Logout
-    </a>
-  </div>
+<div>
+<img src="assets/images/logo.png" style="height:40px">
+</div>
+
+<a href="sales.html" id="nav-sales">
+<i class="bi bi-receipt"></i>
+Sales
+</a>
+
+<a href="#" id="nav-logout">
+<i class="bi bi-box-arrow-right"></i>
+Logout
+</a>
+
+</div>
+
 </nav>
 
+
 <script>
-  // Redirect if not logged in
-  if (!localStorage.getItem("isLoggedIn")) {
-      window.location.href = "index.html";
-  }
 
-  // Highlight active page
-  const path = window.location.pathname.split("/").pop();
-  if(path === "pos.html") $("#nav-pos").addClass("active");
-  if(path === "products.html") $("#nav-products").addClass("active");
-  if(path === "sales.html") $("#nav-sales").addClass("active");
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('./sw.js')
+.then(()=>console.log("SW registered"))
+.catch(err=>console.log(err))
+}
 
-  // Clear cash button
-  $("#btn-clear-cash").click(function() {
-    $("#inp-cash-received").val("").focus();
-  });
+if(!localStorage.getItem("isLoggedIn")){
+window.location.href="index.html"
+}
+
 </script>
 
 </body>
