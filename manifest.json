@@ -1,6 +1,6 @@
 {
-  "name": "Ge-iX BBS App",
-  "short_name": "GeiXBBSApp",
+  "name": "GE-IX BBS POS",
+  "short_name": "GE-IX POS",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
