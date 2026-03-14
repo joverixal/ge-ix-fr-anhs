@@ -1,8 +1,7 @@
 {
-  "name": "ge-ix-bbs-app",
-  "short_name": "GE-IX BBS App",
-  "description": "Offline-capable GE-IX BBS App",
-  "start_url": "pos.html",
+  "name": "Ge-iX BBS App",
+  "short_name": "GeiXBBSApp",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#E41200",
