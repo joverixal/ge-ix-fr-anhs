@@ -28,10 +28,10 @@
 body {
   background-color: #f8f9fa;
   padding: 20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;       /* allow more than 100vh if content grows */
 }
 
 .register-card {
@@ -44,6 +44,17 @@ body {
   background: #fff;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   transition: all 0.2s ease-in-out;
+
+  /* New responsive fix */
+  max-height: 90vh;        /* don’t let card exceed viewport */
+  overflow-y: auto;        /* scroll if content is taller */
+}
+
+@media (min-width: 1200px) {
+  .register-card {
+    max-width: 600px;
+    padding: 3rem;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -90,58 +101,92 @@ body {
   <img src="assets/images/anhs-2011-logo.png" class="register-logo" alt="ANHS 2011">
   <h3 class="register-title">Registration</h3>
 
-  <div class="form-floating mb-3">
-  <input type="text" id="inp-firstname" class="form-control" placeholder="First Name" required>
-  <label for="inp-firstname">First Name<span style="color:red;">*</span></label>
-</div>
+  <div class="register-card">
+  <img src="assets/images/anhs-2011-logo.png" class="register-logo" alt="ANHS 2011">
+  <h3 class="register-title text-center">ANHS 2011 Registration</h3>
 
-<div class="form-floating mb-3">
-  <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name" required>
-  <label for="inp-lastname">Last Name<span style="color:red;">*</span></label>
-</div>
+  <div class="row g-3">
+    <!-- First Name -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="text" id="inp-firstname" class="form-control" placeholder="First Name" required>
+        <label for="inp-firstname">First Name<span style="color:red;">*</span></label>
+      </div>
+    </div>
 
-<div class="form-floating mb-3">
-  <select id="inp-gender" class="form-control" required>
-    <option value="" selected disabled>Select Gender</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
-  </select>
-  <label for="inp-gender">Gender<span style="color:red;">*</span></label>
-</div>
+    <!-- Last Name -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name" required>
+        <label for="inp-lastname">Last Name<span style="color:red;">*</span></label>
+      </div>
+    </div>
 
-<div class="form-floating mb-3">
-  <input type="date" id="inp-birthdate" class="form-control" placeholder="Birthdate" required>
-  <label for="inp-birthdate">Birthdate<span style="color:red;">*</span></label>
-</div>
+    <!-- Gender -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <select id="inp-gender" class="form-control" required>
+          <option value="" selected disabled>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <label for="inp-gender">Gender<span style="color:red;">*</span></label>
+      </div>
+    </div>
 
-<div class="form-floating mb-3">
-  <input type="text" id="inp-contact" class="form-control" placeholder="Contact Number" required>
-  <label for="inp-contact">Contact Number<span style="color:red;">*</span></label>
-</div>
+    <!-- Birthdate -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="date" id="inp-birthdate" class="form-control" placeholder="Birthdate" required>
+        <label for="inp-birthdate">Birthdate<span style="color:red;">*</span></label>
+      </div>
+    </div>
 
-<div class="form-floating mb-3">
-  <input type="text" id="inp-address" class="form-control" placeholder="Address" required>
-  <label for="inp-address">Address<span style="color:red;">*</span></label>
-</div>
-  
-  <!-- Optional Fields -->
-  <div class="form-floating mb-3">
-    <input type="text" id="inp-batchyear" class="form-control" placeholder="Batch Year">
-    <label for="inp-batchyear">Batch Year<span style="color:red;">*</span></label>
+    <!-- Contact Number -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="text" id="inp-contact" class="form-control" placeholder="Contact Number" required>
+        <label for="inp-contact">Contact Number<span style="color:red;">*</span></label>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="text" id="inp-address" class="form-control" placeholder="Address" required>
+        <label for="inp-address">Address<span style="color:red;">*</span></label>
+      </div>
+    </div>
+
+    <!-- Batch Year -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input type="text" id="inp-batchyear" class="form-control" placeholder="Batch Year">
+        <label for="inp-batchyear">Batch Year<span style="color:red;">*</span></label>
+      </div>
+    </div>
+
+    <!-- T-Shirt Size -->
+    <div class="col-md-6">
+      <div class="form-floating">
+        <select id="inp-tshirt" class="form-control">
+          <option value="" selected disabled>Select T-Shirt Size</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+        <label for="inp-tshirt">T-Shirt Size<span style="color:red;">*</span></label>
+      </div>
+    </div>
   </div>
-  
-  <div class="form-floating mb-3">
-    <select id="inp-tshirt" class="form-control">
-      <option value="" selected disabled>Select T-Shirt Size</option>
-      <option value="S">S</option>
-      <option value="M">M</option>
-      <option value="L">L</option>
-      <option value="XL">XL</option>
-      <option value="XXL">XXL</option>
-    </select>
-    <label for="inp-tshirt">T-Shirt Size<span style="color:red;">*</span></label>
-  </div>
+
+  <button id="btn-register" class="btn register-btn w-100 py-3 mt-3">
+    <i class="bi bi-person-plus me-2"></i> Register
+  </button>
+</div>
 
   <button id="btn-register" class="btn register-btn w-100 py-3">
     <i class="bi bi-person-plus me-2"></i> Register
