@@ -7,8 +7,8 @@ $(document).ready(function () {
       "preventDuplicates": true
   };
 
-  // Example: handle registration button
-  $('#btn-register').click(function(){
+  const btnRegister = $('#btn-register');
+  btnRegister.click(function(){
       const runner = {
           firstName: $('#inp-firstname').val(),
           lastName: $('#inp-lastname').val(),
@@ -20,10 +20,13 @@ $(document).ready(function () {
           tshirtSize: $('#inp-tshirt').val()
       };
       
+      btnRegister.prop('disabled', true).text('Registered: Directing to QR Code...');
       toastr.success("Successfully registered. For payment and activation, please contact your batch officer.");
 
+    
     // Wait 4 seconds (4000ms) before executing
     setTimeout(function() {
+        btnRegister.prop('disabled', false).text('Register');
         window.location.href = "qrcode.html";
     }, 10000);
       
