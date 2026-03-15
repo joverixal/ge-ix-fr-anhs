@@ -41,9 +41,9 @@ $(document).ready(function() {
             logoWidth *= scale;
             logoHeight *= scale;
 
-            // Final canvas height: QR + padding + logo + name + batchYear + extra padding
+            // Final canvas height: QR + padding + logo + text
             finalCanvas.width = qrSize + padding * 2;
-            finalCanvas.height = qrSize + padding * 2 + logoHeight + textHeight * 2 + 20;
+            finalCanvas.height = qrSize + padding * 2 + logoHeight + textHeight + 20;
 
             // Fill white background
             ctx.fillStyle = "#ffffff";
@@ -57,16 +57,12 @@ $(document).ready(function() {
             const logoY = padding + qrSize + 10;
             ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
 
-            // Draw user name
+            // Draw Name and Batch Year in same row
             ctx.fillStyle = "#E41200";
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "center";
-            ctx.fillText(userName, finalCanvas.width / 2, logoY + logoHeight + 20);
-
-            // Draw Batch Year below name
-            ctx.fillStyle = "#333333";
-            ctx.font = "16px Arial";
-            ctx.fillText(`Batch ${batchYear}`, finalCanvas.width / 2, logoY + logoHeight + 20 + textHeight);
+            const textY = logoY + logoHeight + 20;
+            ctx.fillText(`${userName} | Batch ${batchYear}`, finalCanvas.width / 2, textY);
 
             // Download final image
             const link = document.createElement('a');
@@ -74,7 +70,7 @@ $(document).ready(function() {
             link.download = `${userName}_ANHS${batchYear}_QR.png`;
             link.click();
 
-            toastr.success("QR Code downloaded with logo, name, and batch year!");
+            toastr.success("QR Code downloaded with logo, name, and batch year in same row!");
         };
     });
 });
