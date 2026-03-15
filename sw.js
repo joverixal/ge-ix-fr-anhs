@@ -13,7 +13,7 @@ const urlsToCache = [
   '/assets/vendor/jquery.min.js',
   '/assets/vendor/toastr.min.css',
   '/assets/vendor/toastr.min.js',
-  '/assets/vendor/jquery.qrcode.min.js',
+  '/assets/vendor/html5-qrcode.min.js',
 ];
 
 self.addEventListener('install', e => {
