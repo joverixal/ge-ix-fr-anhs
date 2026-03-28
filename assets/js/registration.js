@@ -7,6 +7,8 @@ $(document).ready(function () {
       "preventDuplicates": true
   };
 
+  loadBatchYear();
+
   const btnRegister = $('#btn-register');
   btnRegister.click(function(){
       const runner = {
@@ -31,5 +33,18 @@ $(document).ready(function () {
     }, 10000);
       
   });
+
+  function loadBatchYear(){
+    const currentYear = 2026;
+    const startYear = currentYear - 70;
+
+    let options = '<option value="" disabled selected></option>';
+
+    for (let year = currentYear; year >= startYear; year--) {
+        options += `<option value="${year}">${year}</option>`;
+    }
+
+    $('#inp-batch-year').html(options);
+  }
 
 });
