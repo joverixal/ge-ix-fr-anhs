@@ -143,7 +143,7 @@ $(document).ready(function () {
   function generateQRCode(){
     const guidId = '123e4567-e89b-12d3-a456-426614174000';
     const firstname = $('#inp-firstname').val().trim().toUpperCase();
-    const currentDateTime = currentDateTime();
+    const currentDateTime = getCurrentDateTime();
     const fileName = `${firstname}_${currentDateTime}`;
     const baseUrl = "https://your-verification-link.com";
     // Build the full link dynamically
@@ -183,7 +183,7 @@ $(document).ready(function () {
     });
   }
 
-  function currentDateTime(){
+  function getCurrentDateTime(){
     $(document).ready(function() {
       // Get current date and time
       var now = new Date(); // JavaScript Date object
