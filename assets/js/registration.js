@@ -146,7 +146,10 @@ $(document).ready(function () {
     const baseUrl = "https://your-verification-link.com";
     const verificationUrl = `${baseUrl}?id=${guidId}`;
 
+    // Update verification link
     $("#verification-link").attr("href", verificationUrl).text("Check Registration Status");
+
+    // Clear previous QR
     $("#qrcode").empty();
 
     const qrSize = 200;
@@ -155,7 +158,7 @@ $(document).ready(function () {
     const canvasWidth = qrSize + margin * 2;
     const canvasHeight = qrSize + textSpace + margin * 2;
 
-    // Create canvas
+    // Create main canvas
     const canvas = document.createElement('canvas');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -165,19 +168,21 @@ $(document).ready(function () {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Generate QR directly with kjua
+    // Generate QR using kjua directly on a canvas
     const qr = kjua({
-        text: JSON.stringify({ Id: guidId }),
+        render: 'canvas',
+        crisp: true,
         size: qrSize,
         fill: '#000000',
         back: '#ffffff',
-        quiet: 0
+        quiet: 0,
+        text: JSON.stringify({ Id: guidId })
     });
 
-    // Draw QR onto canvas
+    // Draw QR on our main canvas
     ctx.drawImage(qr, margin, margin, qrSize, qrSize);
 
-    // Add text
+    // Draw text
     ctx.textAlign = "center";
     ctx.fillStyle = "#000000";
     ctx.font = "bold 16px Arial";
@@ -185,7 +190,7 @@ $(document).ready(function () {
     ctx.font = "14px Arial";
     ctx.fillText(fullName, canvasWidth / 2, qrSize + margin + 40);
 
-    // Append canvas to DOM
+    // Add canvas to DOM
     $("#qrcode").append(canvas);
     $("#qrcode canvas").css({ display: "block", margin: "0 auto" });
 
