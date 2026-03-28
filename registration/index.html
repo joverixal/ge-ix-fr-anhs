@@ -35,94 +35,96 @@
   .container {
     background: #ffffff;
     border-radius: 1rem;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;  /* less vertical padding */
   }
 
-.register-card {
-  width: 100%;
-  max-width: 700px;
-  border-radius: 1rem;
-  padding: 2rem;
-  border-top: 5px solid #E41200;
-  background: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-
-.register-logo {
-  width: 90px;
-  margin-bottom: 10px;
-}
-
-.register-title {
-  color: #5A1FAF;
-  font-weight: 500;
-}
-
-.register-btn {
-  background: linear-gradient(135deg, #7A2BE2, #00B7C2) !important;
-  color: #fff !important;
-  border: none;
-}
-
-.register-btn:hover {
-  opacity: 0.9;
-}
-.register-btn:active, .register-btn:focus{ background:#cc8400 !important; transform: scale(0.97); }
-
-.form-floating input, .form-floating select { height:50px; font-size:1rem; }
-
-.form-control:focus {
-  border-color: #00B7C2;
-  box-shadow: 0 0 0 0.2rem rgba(0,183,194,0.25);
-}
-
-@media (max-width: 576px) {
-  .form-floating input,
-  .form-floating select {
-    font-size: 0.9rem;
-    height: 45px;
+  .register-card {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 1rem;
+    padding: 2rem;
+    border-top: 5px solid #E41200;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
   }
-
-  .row.g-3 {
-    --bs-gutter-x: 0.5rem;
-    --bs-gutter-y: 0.5rem;
+  
+  .register-logo {
+    width: 60px;           /* smaller logo */
+    margin-bottom: 5px;    /* less space below */
   }
-}
-
-/* Step indicators with titles */
-.step-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70px;
-  cursor: pointer;
-}
-.step-number {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #ccc;
-  color: #fff;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-}
-.step-indicator.active .step-number { background: #7A2BE2; }
-.step-indicator.completed .step-number { background: #00B7C2; }
-
-.step-title {
-  font-size: 0.8rem;
-  text-align: center;
-  color: #333;
-}
-.step-indicator.active .step-title { font-weight: 700; color: #7A2BE2; }
-.step-indicator.completed .step-title { color: #00B7C2; }
-
-.tab-pane { display:none; }
-.tab-pane.active { display:block; }
+  
+  .register-title {
+    font-size: 1.2rem;     /* smaller title */
+    color: #5A1FAF;
+    font-weight: 600;
+    margin-bottom: 15px;   /* reduced spacing */
+  }
+  
+  .register-btn {
+    background: linear-gradient(135deg, #7A2BE2, #00B7C2) !important;
+    color: #fff !important;
+    border: none;
+  }
+  
+  .register-btn:hover {
+    opacity: 0.9;
+  }
+  .register-btn:active, .register-btn:focus{ background:#cc8400 !important; transform: scale(0.97); }
+  
+  .form-floating input, .form-floating select { height:50px; font-size:1rem; }
+  
+  .form-control:focus {
+    border-color: #00B7C2;
+    box-shadow: 0 0 0 0.2rem rgba(0,183,194,0.25);
+  }
+  
+  @media (max-width: 576px) {
+    .form-floating input,
+    .form-floating select {
+      font-size: 0.9rem;
+      height: 45px;
+    }
+  
+    .row.g-3 {
+      --bs-gutter-x: 0.5rem;
+      --bs-gutter-y: 0.5rem;
+    }
+  }
+  
+  /* Step indicators with titles */
+  .step-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    cursor: pointer;
+  }
+  .step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ccc;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .step-indicator.active .step-number { background: #7A2BE2; }
+  .step-indicator.completed .step-number { background: #00B7C2; }
+  
+  .step-title {
+    font-size: 0.8rem;
+    text-align: center;
+    color: #333;
+  }
+  .step-indicator.active .step-title { font-weight: 700; color: #7A2BE2; }
+  .step-indicator.completed .step-title { color: #00B7C2; }
+  
+  .tab-pane { display:none; }
+  .tab-pane.active { display:block; }
 
 </style>
 </head>
