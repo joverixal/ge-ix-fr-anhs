@@ -11,21 +11,30 @@ $(document).ready(function () {
   maskContactNumber();
   loadBatchYear();
 
+  // Basic Info -> Ride Category
   $('#btn-next-basic').click(function() {
-  $('#tab-ride-tab').tab('show');
+      if (validateCurrentTab('#tab-basic')) {
+          $('#tab-ride-tab').tab('show');
+      }
   });
-  $('#btn-back-ride').click(function() {
-    $('#tab-basic-tab').tab('show');
-  });
+
+  // Ride Category -> Payment
   $('#btn-next-ride').click(function() {
-    $('#tab-payment-tab').tab('show');
+      if (validateCurrentTab('#tab-ride')) {
+          $('#tab-payment-tab').tab('show');
+      }
   });
-  $('#btn-back-payment').click(function() {
-    $('#tab-ride-tab').tab('show');
-  });
+
+  // Payment -> Success
   $('#btn-next-payment').click(function() {
-    $('#tab-success-tab').tab('show');
+      if (validateCurrentTab('#tab-payment')) {
+          $('#tab-success-tab').tab('show');
+      }
   });
+
+  // Back buttons don’t need validation
+  $('#btn-back-ride').click(function() { $('#tab-basic-tab').tab('show'); });
+  $('#btn-back-payment').click(function() { $('#tab-ride-tab').tab('show'); });
 
   // Optional: validate on form submit
   $('#frm-registration').on('submit', function(e) {
@@ -91,6 +100,19 @@ $(document).ready(function () {
     $('#inp-contact').mask('0000-000-0000', {
         placeholder: "0912-345-6789"
     });
+  }
+
+  function validateCurrentTab(tabPane) {
+      let isValid = true;
+      // Check all visible required inputs/selects in the tab
+      $(tabPane).find('input[required], select[required]').each(function() {
+          if (!this.checkValidity()) {
+              this.reportValidity(); // triggers browser tooltip
+              isValid = false;
+              return false; // break loop on first invalid field
+          }
+      });
+      return isValid;
   }
 
 });
