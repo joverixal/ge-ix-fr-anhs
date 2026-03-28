@@ -104,14 +104,24 @@ $(document).ready(function () {
 
   function validateCurrentTab(tabPane) {
       let isValid = true;
-      // Check all visible required inputs/selects in the tab
+
+      // Check all visible required inputs/selects
       $(tabPane).find('input[required], select[required]').each(function() {
           if (!this.checkValidity()) {
-              this.reportValidity(); // triggers browser tooltip
+              this.reportValidity(); // browser tooltip
               isValid = false;
-              return false; // break loop on first invalid field
+              return false; // stop on first invalid
           }
       });
+
+      // Special validation for Ride Category tab
+      if (tabPane === '#tab-ride') {
+          if ($('input[name="rideCategory"]:checked').length === 0) {
+              toastr.error("Please select a Ride Category (3km or 6km).");
+              isValid = false;
+          }
+      }
+
       return isValid;
   }
 
