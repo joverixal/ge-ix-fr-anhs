@@ -17,11 +17,8 @@
 
 <!-- jQuery -->
 <script src="../assets/vendor/jquery.min.js"></script>
-<!-- Include jQuery Mask Plugin -->
 <script src="../assets/vendor/jquery.mask.min.js"></script>
-<!-- Bootstrap JS -->
 <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
-<!-- Toastr JS -->
 <script src="../assets/vendor/toastr.min.js"></script>
 
 <script src="../assets/js/config.js"></script>
@@ -35,7 +32,7 @@
   .container {
     background: #ffffff;
     border-radius: 1rem;
-    padding: 1rem 1.5rem;  /* less vertical padding */
+    padding: 1rem 1.5rem;
   }
 
   .register-card {
@@ -48,149 +45,91 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     overflow: hidden;
   }
-  
-  .register-logo {
-    width: 60px;           /* smaller logo */
-    margin-bottom: 5px;    /* less space below */
+
+  /* Header row */
+  .register-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
   }
-  
+  .register-logo {
+    width: 60px;
+    height: auto;
+  }
   .register-title {
-    font-size: 1.2rem;     /* smaller title */
+    font-size: 1.2rem;
     color: #5A1FAF;
     font-weight: 600;
-    margin-bottom: 15px;   /* reduced spacing */
+    margin: 0;
   }
-  
+
   .register-btn {
     background: linear-gradient(135deg, #7A2BE2, #00B7C2) !important;
     color: #fff !important;
     border: none;
   }
-  
-  .register-btn:hover {
-    opacity: 0.9;
-  }
+  .register-btn:hover { opacity: 0.9; }
   .register-btn:active, .register-btn:focus{ background:#cc8400 !important; transform: scale(0.97); }
-  
+
   .form-floating input, .form-floating select { height:50px; font-size:1rem; }
-  
+
   .form-control:focus {
     border-color: #00B7C2;
     box-shadow: 0 0 0 0.2rem rgba(0,183,194,0.25);
   }
-  
+
   @media (max-width: 576px) {
     .form-floating input,
     .form-floating select {
       font-size: 0.9rem;
       height: 45px;
     }
-  
-    .row.g-3 {
-      --bs-gutter-x: 0.5rem;
-      --bs-gutter-y: 0.5rem;
-    }
+    .row.g-3 { --bs-gutter-x: 0.5rem; --bs-gutter-y: 0.5rem; }
 
     .register-logo {
       width: 40px; /* smaller logo on mobile */
     }
   }
-  
+
   /* Step indicators with titles */
-  .step-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70px;
-    cursor: pointer;
-  }
+  .step-indicator { display: flex; flex-direction: column; align-items: center; width: 70px; cursor: pointer; }
   .step-number {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #ccc;
-    color: #fff;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 4px;
+    width: 30px; height: 30px; border-radius: 50%; background: #ccc; color: #fff; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
   }
   .step-indicator.active .step-number { background: #7A2BE2; }
   .step-indicator.completed .step-number { background: #00B7C2; }
-  
-  .step-title {
-    font-size: 0.8rem;
-    text-align: center;
-    color: #333;
-  }
+  .step-title { font-size: 0.8rem; text-align: center; color: #333; }
   .step-indicator.active .step-title { font-weight: 700; color: #7A2BE2; }
   .step-indicator.completed .step-title { color: #00B7C2; }
-  
+
   .tab-pane { display:none; }
   .tab-pane.active { display:block; }
 
-  .form-check-input:checked {
-    background-color: #7A2BE2;
-    border-color: #7A2BE2;
-  }
-  .form-check {
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-  }
-  .form-check-input:checked + .form-check-label {
-    font-weight: 600;
-    color: #7A2BE2;
-  }
+  .form-check-input:checked { background-color: #7A2BE2; border-color: #7A2BE2; }
+  .form-check { padding: 6px 10px; border-radius: 8px; border: 1px solid #ddd; }
+  .form-check-input:checked + .form-check-label { font-weight: 600; color: #7A2BE2; }
 
   /* Hide radio */
-  .pill-option .form-check-input {
-    display: none;
-  }
-  
-  /* Base pill (neutral look) */
-  .pill-option {
-    border: 1px solid #dcdcdc;
-    border-radius: 999px;
-    padding: 6px 14px;
-    cursor: pointer;
-    background: #f5f6f8;
-    color: #333;
-    transition: all 0.2s ease;
-  }
-  
-  /* Label reset */
-  .pill-option .form-check-label {
-    margin: 0;
-    cursor: pointer;
-  }
-  
-  /* Hover */
-  .pill-option:hover {
-    background: #eef1f5;
-    border-color: #bfc6d1;
-  }
-  
-  /* Selected state (DIFFERENT from button gradient) */
-  .pill-option:has(.form-check-input:checked) {
-    background: #e6f4ff;               /* light blue */
-    border-color: #0d6efd;             /* Bootstrap primary */
-    color: #0d6efd;
-    font-weight: 600;
-    box-shadow: 0 2px 6px rgba(13,110,253,0.15);
-    transform: scale(1.05);
-  }
-  
-  /* Optional stronger text when selected */
-  .pill-option .form-check-input:checked + .form-check-label {
-    color: #0d6efd;
-  }
+  .pill-option .form-check-input { display: none; }
 
-  /* Force uppercase display */
-  input, textarea {
-    text-transform: uppercase;
+  .pill-option {
+    border: 1px solid #dcdcdc; border-radius: 999px; padding: 6px 14px;
+    cursor: pointer; background: #f5f6f8; color: #333; transition: all 0.2s ease;
   }
+  .pill-option .form-check-label { margin: 0; cursor: pointer; }
+  .pill-option:hover { background: #eef1f5; border-color: #bfc6d1; }
+  .pill-option:has(.form-check-input:checked) {
+    background: #e6f4ff; border-color: #0d6efd; color: #0d6efd;
+    font-weight: 600; box-shadow: 0 2px 6px rgba(13,110,253,0.15); transform: scale(1.05);
+  }
+  .pill-option .form-check-input:checked + .form-check-label { color: #0d6efd; }
+
+  input, textarea { text-transform: uppercase; }
+
+  /* Force Review tab columns always 2 */
+  #tab-review .col-6 { width: 50%; float: left; box-sizing: border-box; }
 
 </style>
 </head>
@@ -198,12 +137,11 @@
 <body>
 
 <div class="container py-4" style="max-width:700px;">
-  <div class="d-flex align-items-center justify-content-between mb-4">
-    <!-- Title on the left -->
-    <h3 class="register-title mb-0">ANHS Alumni Run 2026</h3>
-  
-    <!-- Logo on the right -->
+
+  <!-- Header: logo + title -->
+  <div class="register-header">
     <img src="../assets/images/anhs-2011-logo.png" class="register-logo" alt="ANHS 2011">
+    <h3 class="register-title">ANHS Alumni Run 2026</h3>
   </div>
 
   <!-- Step Indicators -->
@@ -247,11 +185,8 @@
             <label for="inp-lastname">Last name<span class="text-danger">*</span></label>
           </div>
         </div>
-        <!-- Gender -->
         <div class="col-6">
-          <label class="form-label fw-semibold">
-            Gender<span class="text-danger">*</span>
-          </label>
+          <label class="form-label fw-semibold">Gender<span class="text-danger">*</span></label>
           <div class="d-flex gap-2 mt-1">
             <div class="form-check pill-option">
               <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male">
@@ -287,11 +222,8 @@
             <label for="inp-address">Address<span class="text-danger">*</span></label>
           </div>
         </div>
-        <!-- T-Shirt -->
         <div class="col-6">
-          <label class="form-label fw-semibold">
-            T-Shirt Size<span class="text-danger">*</span>
-          </label>
+          <label class="form-label fw-semibold">T-Shirt Size<span class="text-danger">*</span></label>
           <div class="d-flex flex-wrap gap-2 mt-1">
             <div class="form-check pill-option">
               <input class="form-check-input" type="radio" name="tshirt" id="sizeS" value="S">
@@ -323,65 +255,40 @@
 
     <!-- Tab 2: Run Category -->
     <div class="tab-pane" id="tab-ride">
-  
-      <!-- 3KM -->
       <div class="mb-3">
         <label class="form-label fw-semibold">3KM</label>
         <div class="d-flex flex-wrap gap-2">
-          
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="3kmA" value="3KM - Package A - 200">
-            <label class="form-check-label" for="3kmA">
-              Category A • ₱200
-            </label>
+            <label class="form-check-label" for="3kmA">Category A • ₱200</label>
           </div>
-    
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="3kmB" value="3KM - Package B - 350">
-            <label class="form-check-label" for="3kmB">
-              Category B • ₱350
-            </label>
+            <label class="form-check-label" for="3kmB">Category B • ₱350</label>
           </div>
-    
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="3kmC" value="3KM - Package C - 300">
-            <label class="form-check-label" for="3kmC">
-              Category C • ₱300
-            </label>
+            <label class="form-check-label" for="3kmC">Category C • ₱300</label>
           </div>
-    
         </div>
       </div>
-    
-      <!-- 6KM -->
       <div class="mb-3">
         <label class="form-label fw-semibold">6KM</label>
         <div class="d-flex flex-wrap gap-2">
-          
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="6kmA" value="6KM - Package A - 300">
-            <label class="form-check-label" for="6kmA">
-              Category A • ₱300
-            </label>
+            <label class="form-check-label" for="6kmA">Category A • ₱300</label>
           </div>
-    
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="6kmB" value="6KM - Package B - 450">
-            <label class="form-check-label" for="6kmB">
-              Category B • ₱450
-            </label>
+            <label class="form-check-label" for="6kmB">Category B • ₱450</label>
           </div>
-    
           <div class="form-check pill-option">
             <input class="form-check-input" type="radio" name="rideCategory" id="6kmC" value="6KM - Package C - 400">
-            <label class="form-check-label" for="6kmC">
-              Category C • ₱400
-            </label>
+            <label class="form-check-label" for="6kmC">Category C • ₱400</label>
           </div>
-    
         </div>
       </div>
-    
       <div class="mt-4 d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" id="btn-back-ride">Back</button>
         <button type="button" class="btn register-btn" id="btn-next-ride">Next</button>
@@ -390,7 +297,6 @@
 
     <!-- Tab 3: Payment -->
     <div class="tab-pane text-center" id="tab-payment">
-      <!-- GCash account label -->
       <div class="mb-2">
         <strong>GO**** FE****E Y.</strong><br>
         Mobile No.: 0917 155 ••••<br>
@@ -398,12 +304,7 @@
       </div>
       <img src="../assets/images/gcash-qr_v1.png" class="img-fluid my-3" style="max-width:250px;">
       <div class="form-floating mb-3">
-        <input 
-          type="file" 
-          id="inp-payment-file" 
-          class="form-control" 
-          accept=".jpg,.jpeg,.png"
-        >
+        <input type="file" id="inp-payment-file" class="form-control" accept=".jpg,.jpeg,.png">
         <label for="inp-payment-file">Upload Payment Proof<span class="text-danger">*</span></label>
       </div>
       <div class="d-flex justify-content-between">
@@ -414,11 +315,9 @@
 
     <!-- Tab 4: Review -->
     <div class="tab-pane" id="tab-review">
-    <h5 class="mb-3">Review Your Details</h5>
-  
+      <h5 class="mb-3">Review Your Details</h5>
       <div class="row g-3">
-        <!-- LEFT COLUMN -->
-        <div class="col-6"> <!-- Changed from col-12 col-md-6 -->
+        <div class="col-6">
           <div class="p-3 border rounded-3 h-100">
             <h6 class="fw-bold text-primary mb-2">Basic Information</h6>
             <p class="mb-1"><strong>Full Name:</strong><br><span id="review-fullname"></span></p>
@@ -429,71 +328,19 @@
             <p class="mb-0"><strong>Address:</strong><br><span id="review-address"></span></p>
           </div>
         </div>
-    
-        <!-- RIGHT COLUMN -->
-        <div class="col-6"> <!-- Changed from col-12 col-md-6 -->
+        <div class="col-6">
           <div class="p-3 border rounded-3 mb-3">
             <h6 class="fw-bold text-primary mb-2">Run Category</h6>
-            <p class="mb-0">
-              <strong>Selected:</strong><br>
-              <span id="review-category"></span>
-            </p>
+            <p class="mb-0"><strong>Selected:</strong><br><span id="review-category"></span></p>
           </div>
-    
           <div class="p-3 border rounded-3 mb-3">
             <h6 class="fw-bold text-primary mb-2">T-Shirt</h6>
-            <p class="mb-0">
-              <strong>Size:</strong><br>
-              <span id="review-tshirt"></span>
-            </p>
+            <p class="mb-0"><strong>Size:</strong><br><span id="review-tshirt"></span></p>
           </div>
-    
           <div class="p-3 border rounded-3">
             <h6 class="fw-bold text-primary mb-2">Payment</h6>
-            <p class="mb-0">
-              <strong>Status:</strong><br>
-              <span class="text-success fw-semibold">Uploaded</span>
-            </p>
+            <p class="mb-0"><strong>Status:</strong><br><span class="text-success fw-semibold">Uploaded</span></p>
           </div>
         </div>
       </div>
-    
-      <div class="mt-4 d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" id="btn-back-review">Back</button>
-        <button type="button" class="btn register-btn" id="btn-next-review">Confirm & Submit</button>
-      </div>
-    </div>
-    
-          <!-- Payment -->
-          <div class="p-3 border rounded-3">
-            <h6 class="fw-bold text-primary mb-2">Payment</h6>
-            <p class="mb-0">
-              <strong>Status:</strong><br>
-              <span class="text-success fw-semibold">Uploaded</span>
-            </p>
-          </div>
-    
-        </div>
-    
-      </div>
-    
-      <div class="mt-4 d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" id="btn-back-review">Back</button>
-        <button type="button" class="btn register-btn" id="btn-next-review">Confirm & Submit</button>
-      </div>
-    </div>
-
-    <!-- Tab 5: Success -->
-    <div class="tab-pane text-center" id="tab-success">
-      <h4 class="text-success">Pre-Registration Successful!</h4>
-      <p>Thank you for registering. Please wait for verification and further instructions.</p>
-    </div>
-
-  </form>
-</div>
-
-<div id="footer-placeholder"></div>
-<script src="../assets/js/loadFooter.js"></script>
-
-</body>
-</html>
+      <div class="mt
