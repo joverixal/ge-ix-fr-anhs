@@ -146,18 +146,16 @@ $(document).ready(function () {
     const baseUrl = "https://your-verification-link.com";
     const verificationUrl = `${baseUrl}?id=${guidId}`;
 
-    // Update verification link
     $("#verification-link").attr("href", verificationUrl).text("Check Registration Status");
-
-    // Clear previous QR
     $("#qrcode").empty();
 
-    // Canvas setup
-    const margin = 15;
     const qrSize = 200;
+    const margin = 15;
     const textSpace = 50;
     const canvasWidth = qrSize + margin * 2;
     const canvasHeight = qrSize + textSpace + margin * 2;
+
+    // Create canvas
     const canvas = document.createElement('canvas');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -167,20 +165,17 @@ $(document).ready(function () {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Generate QR code matrix
-    const qr = new QRCodeLib.QRCode(-1, QRCodeLib.QRErrorCorrectLevel.H);
-    qr.addData(JSON.stringify({ Id: guidId }));
-    qr.make();
-    const tileW = qrSize / qr.getModuleCount();
-    const tileH = qrSize / qr.getModuleCount();
+    // Generate QR directly with kjua
+    const qr = kjua({
+        text: JSON.stringify({ Id: guidId }),
+        size: qrSize,
+        fill: '#000000',
+        back: '#ffffff',
+        quiet: 0
+    });
 
     // Draw QR onto canvas
-    for (let row = 0; row < qr.getModuleCount(); row++) {
-        for (let col = 0; col < qr.getModuleCount(); col++) {
-            ctx.fillStyle = qr.isDark(row, col) ? "#000000" : "#ffffff";
-            ctx.fillRect(margin + col * tileW, margin + row * tileH, tileW, tileH);
-        }
-    }
+    ctx.drawImage(qr, margin, margin, qrSize, qrSize);
 
     // Add text
     ctx.textAlign = "center";
