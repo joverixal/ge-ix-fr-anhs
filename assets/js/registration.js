@@ -11,6 +11,22 @@ $(document).ready(function () {
   maskContactNumber();
   loadBatchYear();
 
+  $('#btn-next-basic').click(function() {
+  $('#tab-ride-tab').tab('show');
+  });
+  $('#btn-back-ride').click(function() {
+    $('#tab-basic-tab').tab('show');
+  });
+  $('#btn-next-ride').click(function() {
+    $('#tab-payment-tab').tab('show');
+  });
+  $('#btn-back-payment').click(function() {
+    $('#tab-ride-tab').tab('show');
+  });
+  $('#btn-next-payment').click(function() {
+    $('#tab-success-tab').tab('show');
+  });
+
   // Optional: validate on form submit
   $('#frm-registration').on('submit', function(e) {
     e.preventDefault();
