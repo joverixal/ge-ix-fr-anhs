@@ -77,12 +77,12 @@ $(document).ready(function () {
 
     if(validateTab('#tab-payment')){
       // Populate Review tab
-      $('#review-fullname').text($('#inp-firstname').val().trim() + ' ' + $('#inp-lastname').val().trim());
+      $('#review-fullname').text($('#inp-firstname').val().trim().toUpper() + ' ' + $('#inp-lastname').val().trim().toUpper());
       $('#review-gender').text($('input[name="gender"]:checked').val());
       $('#review-birthdate').text($('#inp-birthdate').val());
       $('#review-contact').text($('#inp-contact').val());
       $('#review-batch').text(emptyStateLabel($('#sel-batch-year').val().trim()));
-      $('#review-address').text($('#inp-address').val().trim());
+      $('#review-address').text($('#inp-address').val().trim().toUpper());
       $('#review-tshirt').text($('input[name="rideCategory"]:checked').val());
       $('#review-category').text($('input[name="tshirt"]:checked').val());
       $('#review-payment').text($('#inp-payment-file').val() ? 'Uploaded' : 'Not uploaded');
