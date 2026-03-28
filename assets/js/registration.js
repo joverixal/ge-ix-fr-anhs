@@ -55,11 +55,43 @@ $(document).ready(function () {
   // Next buttons
   $('#btn-next-basic').click(()=>{ if(validateTab('#tab-basic')) showTab('#tab-ride',2); });
   $('#btn-next-ride').click(()=>{ if(validateTab('#tab-ride')) showTab('#tab-payment',3); });
-  $('#btn-next-payment').click(()=>{ if(validateTab('#tab-payment')) showTab('#tab-success',4); });
+  $('#btn-next-payment').on('click', function() {
+    // Populate Review tab
+    $('#review-fullname').text($('#inp-firstname').val() + ' ' + $('#inp-lastname').val());
+    $('#review-gender').text($('#sel-gender').val());
+    $('#review-birthdate').text($('#inp-birthdate').val());
+    $('#review-contact').text($('#inp-contact').val());
+    $('#review-batch').text($('#sel-batch-year').val());
+    $('#review-address').text($('#inp-address').val());
+    $('#review-tshirt').text($('#sel-tshirt').val());
+    $('#review-category').text($('input[name="rideCategory"]:checked').val());
+    $('#review-payment').text($('#inp-payment-file').val() ? 'Uploaded' : 'Not uploaded');
+
+    // Show Review tab
+    $('.tab-pane').removeClass('active');
+    $('#tab-review').addClass('active');
+
+    // Update step indicators
+    $('.step-indicator').removeClass('active');
+    $('.step-indicator[data-step="4"]').addClass('active');
+});
 
   // Back buttons
   $('#btn-back-ride').click(()=>showTab('#tab-basic',1));
   $('#btn-back-payment').click(()=>showTab('#tab-ride',2));
+  $('#btn-back-review').on('click', function() {
+      $('.tab-pane').removeClass('active');
+      $('#tab-payment').addClass('active');
+      $('.step-indicator').removeClass('active');
+      $('.step-indicator[data-step="3"]').addClass('active');
+  });
+  
+  $('#btn-next-review').on('click', function() {
+      $('.tab-pane').removeClass('active');
+      $('#tab-success').addClass('active');
+      $('.step-indicator').removeClass('active');
+      $('.step-indicator[data-step="5"]').addClass('active');
+  });
 
   function loadBatchYear(){
     const currentYear = 2026;
