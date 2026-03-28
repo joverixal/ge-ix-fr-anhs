@@ -139,4 +139,39 @@ $(document).ready(function () {
     });
   }
 
+  function generateQRCode(){
+    const firstname = $('#inp-firstname').val().trim().toUpperCase();
+    var currentDateTime = moment().format("YYYYMMDD hhmmA"); // format as you like
+    
+    const fileName = `${firstname}_${currentDateTime}`;
+    
+    // Replace this with actual registration ID or verification URL
+    var registrationData = "https://your-verification-link.com?userId=12345";
+
+    // Generate QR Code
+    var qrcode = new QRCode($("#qrcode")[0], {
+      text: registrationData,
+      width: 150,
+      height: 150,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    // Download QR code as image using jQuery
+    $("#btn-download-qr").on("click", function() {
+      var qrImg = $("#qrcode img");
+      if (!qrImg.length) {
+        alert("QR code not generated yet.");
+        return;
+      }
+
+      // Create temporary link and trigger download
+      $("<a>")
+        .attr("href", qrImg.attr("src"))
+        .attr("download", `ANHS_RUN_Registration_QR_${fileName}.png`)[0]
+        .click();
+    });
+  }
+
 });
