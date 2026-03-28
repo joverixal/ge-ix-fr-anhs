@@ -188,18 +188,18 @@ $(document).ready(function () {
         correctLevel: QRCode.CorrectLevel.H
     });
 
-    // Download QR code as image using jQuery
-    $("#btn-download-qr").on("click", function() {
-        var qrImg = $("#qrcode img");
-        if (!qrImg.length) {
+    // Download button functionality without refreshing the page
+    $("#btn-download-qr").off("click").on("click", function(e) {
+        e.preventDefault(); // Prevent form submission or page refresh
+        const canvas = $("#qrcode canvas")[0];
+        if (!canvas) {
             alert("QR code not generated yet.");
             return;
         }
-
-        $("<a>")
-            .attr("href", qrImg.attr("src"))
-            .attr("download", `ANHS_RUN_QR_${fileName}.png`)[0]
-            .click();
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL("image/png");
+        link.download = `ANHS_RUN_QR_${fileName}.png`;
+        link.click();
     });
 }
 
