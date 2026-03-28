@@ -15,8 +15,16 @@ $(document).ready(function () {
   function showTab(tabId, stepNumber) {
       $('.tab-pane').removeClass('active');
       $(tabId).addClass('active');
-      $('.step-indicator').removeClass('active');
-      $('.step-indicator').each(function(i){ if(i+1 <= stepNumber) $(this).addClass('active'); });
+  
+      $('.step-indicator').each(function(i){
+          if(i+1 < stepNumber){
+              $(this).addClass('completed').removeClass('active');
+          } else if(i+1 === stepNumber){
+              $(this).addClass('active').removeClass('completed');
+          } else {
+              $(this).removeClass('active completed');
+          }
+      });
   }
 
   function validateTab(tabId) {
@@ -67,13 +75,7 @@ $(document).ready(function () {
       $('#review-category').text($('input[name="rideCategory"]:checked').val());
       $('#review-payment').text($('#inp-payment-file').val() ? 'Uploaded' : 'Not uploaded');
   
-      // Show Review tab
-      $('.tab-pane').removeClass('active');
-      $('#tab-review').addClass('active');
-  
-      // Update step indicators
-      $('.step-indicator').removeClass('active');
-      $('.step-indicator[data-step="4"]').addClass('active');
+      showTab('#tab-review', 4);
   });
 
   // Back buttons
@@ -87,10 +89,7 @@ $(document).ready(function () {
   });
   
   $('#btn-next-review').on('click', function() {
-      $('.tab-pane').removeClass('active');
-      $('#tab-success').addClass('active');
-      $('.step-indicator').removeClass('active');
-      $('.step-indicator[data-step="5"]').addClass('active');
+      showTab('#tab-success', 5);
   });
 
   function loadBatchYear(){
