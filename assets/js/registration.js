@@ -31,7 +31,7 @@ $(document).ready(function () {
       let valid = true;
       // Ride Category validation
       if(tabId=='#tab-ride' && $('input[name="rideCategory"]:checked').length===0){
-          toastr.error("Please select a Ride Category.");
+          toastr.error("Please select a category.");
           valid=false;
       }
       // Payment file validation
@@ -58,11 +58,11 @@ $(document).ready(function () {
               toastr.error("Contact number must be 11 digits.");
               valid=false;
           }else if(gender == ''){
-              toastr.error("Select gender.");
+              toastr.error("Please select a gender.");
               valid=false;
           }
           else if(tshirt == ''){
-                toastr.error("Select T-Shirt size.");
+                toastr.error("Please select a T-Shirt size.");
                 valid=false;
             }  
         }
