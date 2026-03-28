@@ -29,9 +29,6 @@ $(document).ready(function () {
 
   function validateTab(tabId) {
       let valid = true;
-      $(tabId).find('input[required], select[required]').each(function() {
-          if(!this.checkValidity()) { this.reportValidity(); valid=false; return false; }
-      });
       // Ride Category validation
       if(tabId=='#tab-ride' && $('input[name="rideCategory"]:checked').length===0){
           toastr.error("Please select a Ride Category.");
@@ -44,6 +41,11 @@ $(document).ready(function () {
       }
       // Birthdate ≥10 years
       if(tabId=='#tab-basic'){
+        $(tabId).find('input[required], select[required]').each(function() {
+          if(!this.checkValidity()) { this.reportValidity(); valid=false; return false; }
+        });
+
+        if(!valid){
           const birth = new Date($('#inp-birthdate').val());
           const minDate = new Date(); minDate.setFullYear(minDate.getFullYear()-10);
           const contact = $('#inp-contact').cleanVal();
@@ -62,7 +64,8 @@ $(document).ready(function () {
           else if(tshirt == ''){
                 toastr.error("Select T-Shirt size.");
                 valid=false;
-            }        
+            }  
+        }
       }
       return valid;
   }
