@@ -130,8 +130,8 @@ $(document).ready(function () {
     ctx.fillText(fullName, canvasWidth / 2, qrSize + margin + 40);
 
     // Add canvas to DOM
-    $("#qrcode").append(canvas);
-    $("#qrcode canvas").css({ display: "block", margin: "0 auto" });
+    $("#result-qr").append(canvas);
+    $("#result-qr canvas").css({ display: "block", margin: "0 auto" });
 
     // Download button
     $("#btn-download-qr").off("click").on("click", function(e) {
