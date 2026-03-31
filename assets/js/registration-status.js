@@ -104,7 +104,7 @@ $(document).ready(function () {
         fill: '#000000',
         back: '#ffffff',
         quiet: 0,
-        text: JSON.stringify({ data.id, data.firstName, data.lastName})
+        text: JSON.stringify({ id: data.id, firstName: data.firstName, lastName: data.lastName})
     });
 
     // Draw QR on our main canvas
