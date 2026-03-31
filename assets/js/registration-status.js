@@ -21,10 +21,15 @@ $(document).ready(function () {
 
   function search(id, firstName, lastName){
 
+    
+    
     const btnScanQR = $('#btn-scan-qr');
     const btnSearchName = $('#btn-search-name');
     btnScanQR.prop('disabled', true);
+    btnScanQR.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Scan QR');
+
     btnSearchName.prop('disabled', true);
+    btnSearchName.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Search');
     
     const params = { action: "registrationStatus", id, firstName, lastName};
     
@@ -44,19 +49,25 @@ $(document).ready(function () {
                     showRegistrationResult(response.runerData);
                   
                     btnScanQR.prop('disabled', false);
+                    btnScanQR.html('Scan QR'); // restore original text
                     btnSearchName.prop('disabled', false);
+                    btnSearchName.html('Search'); // restore original text
 
                 } else {
                     toastr.error(response.message || "Record not found");
                     
                     btnScanQR.prop('disabled', false);
+                    btnScanQR.html('Scan QR'); // restore original text
                     btnSearchName.prop('disabled', false);
+                    btnSearchName.html('Search'); // restore original text
                 }
 
             },
             error: function (err) {
                 btnScanQR.prop('disabled', false);
+                btnScanQR.html('Scan QR'); // restore original text
                 btnSearchName.prop('disabled', false);
+                btnSearchName.html('Search'); // restore original text
               
                 alert("Network error, please try again later");
             }
@@ -75,7 +86,7 @@ $(document).ready(function () {
     // Clear previous QR
     $("#result-qr").empty();
 
-    const fullName = `${data.firstName} ${data..lastName}`;
+    const fullName = `${data.firstName} ${data.lastName}`;
     const eventTitle = "2026 ANHS Grand Alumni Fun Run";
     const currentDateTime = getCurrentDateTime();
     const fileName = `${firstName}_${currentDateTime}`;
