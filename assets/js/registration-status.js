@@ -11,7 +11,7 @@ $(document).ready(function () {
     const id = '';
     const firstName = $('#inp-firstname').val().trim();
     const lastName = $('#inp-lastname').val().trim();
-    if(!first || !last){
+    if(!firstName || !lastName){
         toastr.error("Enter both first and last name");
         return;
     }
