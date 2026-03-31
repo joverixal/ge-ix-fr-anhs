@@ -107,10 +107,7 @@ $(document).ready(function () {
   
           // 🔁 Restart scanner after fail
           await stopScanner();
-  
-          html5QrScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 }, false);
-          html5QrScanner.render(onScanSuccess);
-  
+          
           hideLoading();
         }
       },
