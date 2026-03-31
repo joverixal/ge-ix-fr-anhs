@@ -7,6 +7,22 @@ $(document).ready(function () {
       "preventDuplicates": true
   };
 
+  function stopScanner() {
+  if (html5QrScanner) {
+    return html5QrScanner.clear()
+      .then(() => {
+        html5QrScanner = null;
+        $("#reader").html(""); // IMPORTANT: fully reset DOM
+      })
+      .catch(err => {
+        console.log("Scanner clear error:", err);
+        html5QrScanner = null;
+        $("#reader").html("");
+      });
+  }
+  return Promise.resolve();
+}
+
   let html5QrScanner = null;
   const $qrLoading = $('#qr-loading');
   let qrModal = new bootstrap.Modal($('#qrModal')[0]);
@@ -17,80 +33,94 @@ $(document).ready(function () {
   hideLoading();
   
   // Open modal and start scanner
-  $('#btn-scan-qr').click(function() {
-      // Show modal
-      qrModal.show();
+  $('#btn-scan-qr').click(async function() {
+    qrModal.show();
   
-      // If scanner already exists, clear it first
-      if (html5QrScanner) {
-          html5QrScanner.clear().catch(err => console.log(err));
-          html5QrScanner = null;
+    showLoading();
+  
+    // Ensure old scanner is fully stopped first
+    await stopScanner();
+  
+    html5QrScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: 250 },
+      false
+    );
+  
+    function onScanSuccess(decodedText) {
+      try {
+        const data = JSON.parse(decodedText);
+  
+        showLoading();
+  
+        stopScanner().then(() => {
+          searchQRCode(data.id);
+        });
+  
+      } catch (err) {
+        toastr.error("Invalid QR Code!");
+        // reset scanner so user can scan again
+        stopScanner().then(() => {
+          hideLoading();
+        });
       }
+    }
   
-      // Initialize QR scanner
-      html5QrScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 }, /* verbose */ false);
+    html5QrScanner.render(onScanSuccess);
   
-      function onScanSuccess(decodedText, decodedResult) {
-          try {
-              // Assume QR code contains JSON string with registration ID
-              const data = JSON.parse(decodedText);
-  
-              // Stop scanner immediately to avoid multiple scans
-              html5QrScanner.clear().then(() => {
-                  html5QrScanner = null;
-                  searchQRCode(data.id);
-              }).catch(err => {
-                  console.error("Failed to stop QR scanner:", err);
-              });
-  
-          } catch (err) {
-              toastr.error("Invalid QR Code!");
-          }
-      }
-  
-      html5QrScanner.render(onScanSuccess);
+    hideLoading();
   });
   
   // Stop scanner when modal closes manually
-  $('#qrModal').on('hidden.bs.modal', function() {
-      if (html5QrScanner) {
-          html5QrScanner.clear().then(() => {
-              html5QrScanner = null;
-          }).catch(err => console.log("Failed to clear QR scanner:", err));
-      }
+  $('#qrModal').on('hidden.bs.modal', async function() {
+    showLoading();
+    await stopScanner();
+    hideLoading();
   });
   
   // AJAX search function
   function searchQRCode(id) {
- 
     const firstName = $('#inp-firstname').val();
     const lastName = $('#inp-lastname').val();
     const params = { action: "registrationStatus", id, firstName, lastName };
-
+  
     showLoading();
-    
+  
     $.ajax({
-          url: API_URL,
-          method: "GET",
-          data: params,
-          success: function(response) {
-              if (typeof response === "string") response = JSON.parse(response);
+      url: API_URL,
+      method: "GET",
+      data: params,
+      success: async function(response) {
+        if (typeof response === "string") response = JSON.parse(response);
   
-              if (response.success) {
-                  hideLoading();
-                  qrModal.hide();
-                  showRegistrationResult(response.runerData);
-              } else {
-                  hideLoading();
-                  toastr.error(response.message || "Record not found");
-              }
+        if (response.success) {
+          hideLoading();
+          qrModal.hide();
+          showRegistrationResult(response.runerData);
+        } else {
+          toastr.error(response.message || "Record not found");
   
-          },
-          error: function() {
-              hideLoading();
-              toastr.error("Network error, please try again later");
-          }
-      });
+          // 🔁 Restart scanner after fail
+          await stopScanner();
+  
+          html5QrScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 }, false);
+          html5QrScanner.render(onScanSuccess);
+  
+          hideLoading();
+        }
+      },
+      error: async function() {
+        toastr.error("Network error, please try again later");
+  
+        // 🔁 Restart scanner
+        await stopScanner();
+  
+        html5QrScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 }, false);
+        html5QrScanner.render(onScanSuccess);
+  
+        hideLoading();
+      }
+    });
   }
 
   $('#btn-search-name').click(function(){
