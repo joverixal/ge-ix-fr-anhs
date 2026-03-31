@@ -7,6 +7,23 @@ $(document).ready(function () {
       "preventDuplicates": true
   };
 
+  // Initialize QR code scanner
+function onScanSuccess(decodedText, decodedResult) {
+    try {
+        // Assume QR code contains JSON string of registration data
+        const data = JSON.parse(decodedText);
+        search(data.id);
+    } catch(err) {
+        toastr.error("Invalid QR Code!");
+    }
+}
+
+// Start scanner
+let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 }
+);
+html5QrcodeScanner.render(onScanSuccess);
+
   $('#btn-search-name').click(function(){
     const id = '';
     const firstName = $('#inp-firstname').val().trim().toUpperCase();
