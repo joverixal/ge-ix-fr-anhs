@@ -164,6 +164,8 @@ $(document).ready(function () {
                 toastr.error("Upload failed!");
             }
         });
+
+      reader.readAsDataURL(file);
   }
 
   // buildSuccessContent();
