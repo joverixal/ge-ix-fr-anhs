@@ -30,7 +30,7 @@ $(document).ready(function () {
   function validateTab(tabId) {
       let valid = true;
       // Ride Category validation
-      if(tabId=='#tab-ride' && $('input[name="rideCategory"]:checked').length===0){
+      if(tabId=='#tab-ride'){
         const rideCategory = $('input[name="rideCategory"]:checked').val();
         const tshirt = $('input[name="tshirt"]:checked').val();
 
@@ -38,8 +38,7 @@ $(document).ready(function () {
           toastr.error("Please select a category.");
           valid=false;
         }else{
-
-          if(rideCategory == '3KM - Package A - 200' || rideCategory == '3KM - Package A - 250' || rideCategory == '6KM - Package A - 300' || rideCategory == '6KM - Package A - 350'){
+          if(rideCategory.includes('Package A')){
           }else{
             if(!tshirt){
                 toastr.error("Please select a T-Shirt size.");
@@ -137,7 +136,7 @@ $(document).ready(function () {
     if(selected.includes('Package A')){
       $('input[name="tshirt"]').prop('checked', false).prop('disabled', true);
     }else{
-      $('input[name="tshirt"]').prop('disabled', true);
+      $('input[name="tshirt"]').prop('disabled', false);
     }
   });
 
