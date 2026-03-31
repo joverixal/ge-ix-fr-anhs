@@ -138,6 +138,9 @@ $(document).ready(function () {
       }
   });
 
+  // start reading the file (triggers onload)
+  reader.readAsDataURL(file);
+
   buildSuccessContent();
 
   // Hide entire form UI (tabs + steps)
