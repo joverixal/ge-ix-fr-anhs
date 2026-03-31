@@ -127,6 +127,7 @@ $(document).ready(function () {
         url: API_URL,
         type: "POST",
         data: JSON.stringify(params),
+        contentType: "application/json", // important for JSON POST
         success: function (response) {
     
             if (typeof response === "string") {
