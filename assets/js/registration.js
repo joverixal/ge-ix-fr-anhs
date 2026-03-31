@@ -109,16 +109,15 @@ $(document).ready(function () {
 
     const file = fileInput.files[0];
     const formData = new FormData();
-    formData.append('action', 'registration'); // tells backend what to do
-    formData.append('file', file);             // send file directly
-    formData.append('filename', file.name);    // optional, you can read it in backend
+    formData.append('file', file); // send file directly
+    formData.append('action', 'registration'); // optional metadata
 
     $.ajax({
-        url: API_URL, // your Google Apps Script URL
+        url: API_URL, 
         type: "POST",
         data: formData,
-        processData: false,  // very important for FormData
-        contentType: false,  // very important for FormData
+        processData: false,  // must be false for FormData
+        contentType: false,  // must be false for FormData
         success: function(response) {
             if (typeof response === "string") response = JSON.parse(response);
             console.log("Registration success:", response);
@@ -129,7 +128,7 @@ $(document).ready(function () {
             toastr.error('Error uploading file. Please try again.');
         }
     });
-  });
+});
 
   // buildSuccessContent();
 
