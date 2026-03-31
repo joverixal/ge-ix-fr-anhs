@@ -70,7 +70,7 @@ $(document).ready(function () {
     $('#result-batch').text(data.batchYear);
     $('#result-category').text(data.package);
     $('#result-tshirt').text(data.tshirtSize);
-    $('#result-payment').text(data.Status);
+    $('#result-payment').text(data.status);
     // QR Code
     $('#result-qr').empty();
     kjua({ text: data.id, size: 150, fill: '#7A2BE2' }).appendTo('#result-qr');
