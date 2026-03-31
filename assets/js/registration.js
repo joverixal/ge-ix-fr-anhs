@@ -126,29 +126,20 @@ $(document).ready(function () {
   }
 
   function registration(){
-  const fileInput = $('#inp-payment-file')[0];
-    const amountDue = '100';
-
-    if (fileInput.files.length === 0) {
-        alert('Please select a file.');
-        return;
-    }
-
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const base64Data = e.target.result.split(',')[1]; // remove data:image/...;base64,
-        const payload = {
-            action: "registration",
-            imageData: base64Data,
-            amountDue: amountDue
-        };
-
-          compressImage(file, 800, 0.7, function (base64Data) {
+   const fileInput = $('#inp-payment-file')[0];
+   const amountDue = '100';
+  
+      if (fileInput.files.length === 0) {
+          alert('Please select a file.');
+          return;
+      }
+  
+      const file = fileInput.files[0];
+  
+      compressImage(file, 800, 0.7, function (base64Data) {
           // 🔥 send compressed image
           $.ajax({
-              url: API_URL,
+              url: "https://script.google.com/macros/s/AKfycbxKnbAauKIZKRjN54q8H8aBx4XlgitQOsEYTYOpxIvUJaK_-IxSEcTD6b8dXxtdSsqX/exec",
               method: "POST",
               data: {
                   action: "registration",
@@ -165,10 +156,44 @@ $(document).ready(function () {
               }
           });
       });
+  }
+
+  function compressImage(file, maxWidth, quality, callback) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const img = new Image();
+
+        img.onload = function () {
+            let width = img.width;
+            let height = img.height;
+
+            // ✅ Resize if too large
+            if (width > maxWidth) {
+                height = height * (maxWidth / width);
+                width = maxWidth;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // ✅ Compress to JPEG (smaller than PNG)
+            const compressedBase64 = canvas
+                .toDataURL('image/jpeg', quality)
+                .split(',')[1];
+
+            callback(compressedBase64);
+        };
+
+        img.src = e.target.result;
     };
 
     reader.readAsDataURL(file);
-  }
+}
 
   // buildSuccessContent();
 
