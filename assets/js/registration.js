@@ -102,22 +102,18 @@ $(document).ready(function () {
   
  $('#btn-next-review').on('click', function() {
     const fileInput = $('#inp-payment-file')[0];
-    if (fileInput.files.length === 0) {
-        toastr.error('Please upload Payment Proof');
-        return;
+
+    const formData = new FormData();
+    formData.append('action', 'registration'); // tell backend what to do
+
+    // Optional file
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        formData.append('file', file);
     }
 
-    const file = fileInput.files[0];
-    const formData = new FormData();
-
-    // Required: specify the action
-    formData.append('action', 'registration');
-
-    // Optional: send file
-    formData.append('file', file);
-
-    // Optional: any other data
-    formData.append('userId', '1234');
+    // Optional extra fields
+    formData.append('userId', '123');
     formData.append('amount', '1000');
 
     $.ajax({
