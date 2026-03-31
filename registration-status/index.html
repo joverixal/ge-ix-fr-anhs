@@ -19,6 +19,7 @@
 <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
 <script src="../assets/vendor/toastr.min.js"></script>
 <script src="../assets/vendor/kjua.min.js"></script>
+<script src="assets/vendor/html5-qrcode.min.js"></script>
 
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/registration-status.js"></script>
@@ -57,9 +58,8 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
     <!-- QR Code Search -->
     <div class="mb-4 text-center">
       <h5>Scan Your QR Code</h5>
-      <div id="qrcode"></div>
-      <input type="file" id="inp-qr-file" class="form-control mt-2" accept=".png,.jpg,.jpeg">
-      <button type="button" class="btn register-btn mt-2" id="btn-scan-qr">Scan QR</button>
+      <!-- QR code scanner -->
+      <div id="reader"></div>
     </div>
 
     <hr>
