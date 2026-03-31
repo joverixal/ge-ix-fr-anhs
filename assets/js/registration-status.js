@@ -7,22 +7,43 @@ $(document).ready(function () {
       "preventDuplicates": true
   };
 
-  // Initialize QR code scanner
-function onScanSuccess(decodedText, decodedResult) {
-    try {
-        // Assume QR code contains JSON string of registration data
-        const data = JSON.parse(decodedText);
-        search(data.id);
-    } catch(err) {
-        toastr.error("Invalid QR Code!");
-    }
-}
+let html5QrScanner;
 
-// Start scanner
-let html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 250 }
-);
-html5QrcodeScanner.render(onScanSuccess);
+  // Open modal and start scanner
+  $('#btn-scan-qr').click(function() {
+    const qrModal = new bootstrap.Modal($('#qrModal')[0]);
+    qrModal.show();
+
+    if (!html5QrScanner) {
+      html5QrScanner = new Html5Qrcode("reader");
+
+      const qrConfig = { fps: 10, qrbox: 250 };
+
+      html5QrScanner.start(
+        { facingMode: "environment" },
+        qrConfig,
+        function(qrCodeMessage) {
+          // QR code detected
+          searchQRCode(qrCodeMessage.id);
+          
+        },
+        function(errorMessage) {
+          // optional scan errors
+          console.log(errorMessage);
+        }
+      ).catch(err => console.error("Unable to start QR scanner:", err));
+    }
+  });
+
+  // Stop scanner when modal closes
+  $('#qrModal').on('hidden.bs.modal', function() {
+    if (html5QrScanner) {
+      html5QrScanner.stop().then(() => {
+        html5QrScanner.clear();
+        html5QrScanner = null;
+      }).catch(err => console.log(err));
+    }
+  });
 
   $('#btn-search-name').click(function(){
     const id = '';
@@ -35,6 +56,62 @@ html5QrcodeScanner.render(onScanSuccess);
     search(id, firstName, lastName);
     
   });
+
+  function searchQRCode(id){
+    const btnScanQR = $('#btn-scan-qr');
+    const btnSearchName = $('#btn-search-name');
+    btnScanQR.prop('disabled', true);
+    btnScanQR.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Scan QR');
+
+    btnSearchName.prop('disabled', true);
+    btnSearchName.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Search');
+    
+    const params = { action: "registrationStatus", id, firstName, lastName};
+    
+    $.ajax({
+            url: API_URL,
+            method: "GET",
+            data: params,
+            success: function (response) {
+
+              // Parse if string
+                if (typeof response === "string") {
+                    response = JSON.parse(response);
+                }
+
+                if (response.success) {
+
+                  html5QrScanner.stop().then(() => {
+                    qrModal.hide();
+                  }).catch(err => console.log(err));
+
+                    showRegistrationResult(response.runerData);
+                  
+                    btnScanQR.prop('disabled', false);
+                    btnScanQR.html('Scan QR'); // restore original text
+                    btnSearchName.prop('disabled', false);
+                    btnSearchName.html('Search'); // restore original text
+
+                } else {
+                    toastr.error(response.message || "Record not found");
+                    
+                    btnScanQR.prop('disabled', false);
+                    btnScanQR.html('Scan QR'); // restore original text
+                    btnSearchName.prop('disabled', false);
+                    btnSearchName.html('Search'); // restore original text
+                }
+
+            },
+            error: function (err) {
+                btnScanQR.prop('disabled', false);
+                btnScanQR.html('Scan QR'); // restore original text
+                btnSearchName.prop('disabled', false);
+                btnSearchName.html('Search'); // restore original text
+              
+                alert("Network error, please try again later");
+            }
+        });
+  }
 
   function search(id, firstName, lastName){
     const btnScanQR = $('#btn-scan-qr');
