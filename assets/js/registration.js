@@ -284,10 +284,10 @@ $(document).ready(function () {
   }
 
  function buildSuccessContent(id, firstName, lastName) {
-    const fullName = `${firstname} ${lastname}`;
+    const fullName = `${firstName} ${lastName}`;
     const eventTitle = "2026 ANHS Grand Alumni Fun Run";
     const currentDateTime = getCurrentDateTime();
-    const fileName = `${firstname}_${currentDateTime}`;
+    const fileName = `${firstName}_${currentDateTime}`;
     const baseUrl = "https://joverixal.github.io/ge-ix-fr-anhs/registration-status/";
     const verificationUrl = `${baseUrl}?id=${id}`;
 
