@@ -100,7 +100,7 @@ $(document).ready(function () {
   $('#btn-back-payment').click(()=>showTab('#tab-ride',2));
   $('#btn-back-review').on('click', function() {showTab('#tab-payment', 3);});
   
-  $('#btn-next-review').on('click', function() {
+ $('#btn-next-review').on('click', function() {
     const fileInput = $('#inp-payment-file')[0];
     if (fileInput.files.length === 0) {
         toastr.error('Please upload Payment Proof');
@@ -109,26 +109,34 @@ $(document).ready(function () {
 
     const file = fileInput.files[0];
     const formData = new FormData();
-    formData.append('file', file); // send file directly
-    formData.append('action', 'registration'); // optional metadata
+
+    // Required: specify the action
+    formData.append('action', 'registration');
+
+    // Optional: send file
+    formData.append('file', file);
+
+    // Optional: any other data
+    formData.append('userId', $('#inp-user-id').val());
+    formData.append('amount', $('#inp-amount').val());
 
     $.ajax({
-        url: API_URL, 
+        url: API_URL,
         type: "POST",
         data: formData,
-        processData: false,  // must be false for FormData
-        contentType: false,  // must be false for FormData
+        processData: false,
+        contentType: false,
         success: function(response) {
             if (typeof response === "string") response = JSON.parse(response);
-            console.log("Registration success:", response);
-            toastr.success('File uploaded successfully!');
+            console.log("Success:", response);
+            toastr.success('Action completed successfully!');
         },
         error: function(err) {
-            console.error("Error uploading file:", err);
-            toastr.error('Error uploading file. Please try again.');
+            console.error("Error:", err);
+            toastr.error('Something went wrong. Please try again.');
         }
     });
-});
+  });
 
   // buildSuccessContent();
 
