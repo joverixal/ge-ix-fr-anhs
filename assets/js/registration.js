@@ -300,7 +300,7 @@ $(document).ready(function () {
     const currentDateTime = getCurrentDateTime();
     const fileName = `${firstName}_${currentDateTime}`;
     const baseUrl = "https://joverixal.github.io/ge-ix-fr-anhs/registration-status/";
-    const verificationUrl = `${baseUrl}?id=${id}`;
+    const verificationUrl = `${baseUrl}`;
 
     // Update verification link
     $("#verification-link").attr("href", verificationUrl).text("Check Registration Status");
