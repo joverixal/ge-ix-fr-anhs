@@ -165,7 +165,7 @@ $(document).ready(function () {
     const firstname = $('#inp-firstname').val().trim().toUpperCase();
     const lastname = $('#inp-lastname').val().trim().toUpperCase();
     const fullName = `${firstname} ${lastname}`;
-    const eventTitle = "ANHS Alumni Run 2026";
+    const eventTitle = "2026 ANHS Grand Alumni Fun Run";
     const currentDateTime = getCurrentDateTime();
     const fileName = `${firstname}_${currentDateTime}`;
     const baseUrl = "https://your-verification-link.com";
