@@ -53,6 +53,20 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
   justify-content: center;
 }
 
+.input-group input {
+  border-radius: 0;       /* remove separate rounding */
+}
+
+.input-group input:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.input-group button {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
 </style>
 </head>
 <body>
@@ -107,31 +121,19 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
       </button>
     </div>
   
-    <!-- Single Row: First Name | Last Name | Search -->
-    <div class="row g-2 align-items-stretch">
-  
+    <!-- Merged Row: First Name | Last Name | Search -->
+    <div class="input-group">
+      
       <!-- First Name -->
-      <div class="col">
-        <div class="form-floating h-100">
-          <input type="text" id="inp-firstname" class="form-control h-100" placeholder="First Name">
-          <label for="inp-firstname">First Name</label>
-        </div>
-      </div>
+      <input type="text" class="form-control" id="inp-firstname" placeholder="First Name">
   
       <!-- Last Name -->
-      <div class="col">
-        <div class="form-floating h-100">
-          <input type="text" id="inp-lastname" class="form-control h-100" placeholder="Last Name">
-          <label for="inp-lastname">Last Name</label>
-        </div>
-      </div>
+      <input type="text" class="form-control" id="inp-lastname" placeholder="Last Name">
   
       <!-- Search Button -->
-      <div class="col-auto d-flex">
-        <button type="button" class="btn btn-outline-secondary w-100" id="btn-search-name">
-          Search
-        </button>
-      </div>
+      <button class="btn btn-outline-secondary" type="button" id="btn-search-name">
+        Search
+      </button>
   
     </div>
   </div>
