@@ -87,36 +87,41 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
     </div>
   </div>
     
+    <div class="mb-4 text-center">
+
+    <!-- Scan QR (Top & Centered) -->
+    <button type="button" 
+            class="btn register-btn d-inline-flex align-items-center gap-2 px-4 mb-3" 
+            id="btn-scan-qr">
+      Scan QR
+    </button>
+  
     <!-- Search by Name -->
-    <div class="mb-4">
-      <div class="row g-3">
-        <div class="col-6">
-          <div class="form-floating">
-            <input type="text" id="inp-firstname" class="form-control" placeholder="First Name">
-            <label for="inp-firstname">First Name</label>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-floating">
-            <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name">
-            <label for="inp-lastname">Last Name</label>
-          </div>
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="form-floating">
+          <input type="text" id="inp-firstname" class="form-control" placeholder="First Name">
+          <label for="inp-firstname">First Name</label>
         </div>
       </div>
-      <div class="mt-3 d-flex justify-content-between flex-wrap gap-2">
-      
-        <!-- Scan QR (Primary) -->
-        <button type="button" class="btn register-btn d-flex align-items-center gap-2 px-4" id="btn-scan-qr">
-          Scan QR
-        </button>
-      
-        <!-- Search (Secondary) -->
-        <button type="button" class="btn btn-outline-secondary d-flex align-items-center gap-2 px-4" id="btn-search-name">
-          Search
-        </button>
-      
+      <div class="col-6">
+        <div class="form-floating">
+          <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name">
+          <label for="inp-lastname">Last Name</label>
+        </div>
       </div>
     </div>
+  
+    <!-- Search button -->
+    <div class="mt-3 text-center">
+      <button type="button" 
+              class="btn btn-outline-secondary d-inline-flex align-items-center gap-2 px-4" 
+              id="btn-search-name">
+        Search
+      </button>
+    </div>
+  
+  </div>
 
     <!-- Registration Details Result -->
     <div id="status-result" class="d-none">
