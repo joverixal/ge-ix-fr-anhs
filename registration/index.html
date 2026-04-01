@@ -177,13 +177,24 @@
 }
 
 .status-banner {
-  background: #0d6efd;
-  color: #fff;
-  padding: 10px;
+  background: #fff;
+  padding: 10px 12px;
   border-radius: 10px;
   margin-bottom: 15px;
   font-size: 0.9rem;
+  border: 1px solid #eee;
 }
+
+.status-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.status-link:hover {
+  text-decoration: underline;
+}
+  
 </style>
 </head>
 
@@ -198,9 +209,9 @@
   </div>
 
   <div class="status-banner text-center">
-    <span>Already registered?</span><br>
-    <a href="https://joverixal.github.io/ge-ix-fr-anhs/registration-status" class="btn btn-sm btn-light mt-1">
-      <i class="bi bi-search"></i> Check Registration Status
+    <span>Already registered? Tap here to </span>
+    <a href="https://joverixal.github.io/ge-ix-fr-anhs/registration-status/" class="status-link">
+      check registration status
     </a>
   </div>
 
