@@ -121,25 +121,7 @@ $(document).ready(function () {
     
     const fileInput = $('#inp-payment-file')[0];
     const file = fileInput.files[0];
-  
-    compressImage(file, 800, 0.7, function (base64Data) {
-        // 🔥 send compressed image
-
-        const data = {
-          action: "registration",
-          firstName,
-          lastName,
-          gender,
-          birthdate,
-          contactNumber,
-          batchYear,
-          address,
-          package,
-          amount,
-          tshirtSize,
-          imageData: base64Data
-        };
-
+    
       const btnNextReview= $('#btn-next-review');
       btnNextReview.prop('disabled', true);
       btnNextReview.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Confirm & Submit');
