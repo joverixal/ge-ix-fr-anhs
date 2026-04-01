@@ -8,18 +8,11 @@ $(document).ready(function () {
   };
 
   const submitBtn = $("#btn-next-review");
-  const privacyChk = $("#chk-privacy");
+  const privacyChk = $("#chk-privacy-agree");
 
-  // Initially disabled
-  submitBtn.prop("disabled", true);
-
-  // Enable button when checked
+  // Enable/disable button based on checkbox
   privacyChk.on("change", function() {
-    if ($(this).is(":checked")) {
-      submitBtn.prop("disabled", false);
-    } else {
-      submitBtn.prop("disabled", true);
-    }
+    submitBtn.prop("disabled", !$(this).is(":checked"));
   });
 
   limitBirthdate();
