@@ -41,8 +41,20 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
 #result-qr { display:flex; justify-content:center; align-items:center; margin:20px auto; }
 #result-qr canvas { display:block; max-width:100%; height:auto; }
 
+.row.equal-height {
+  align-items: stretch;
+}
+
+.input-group {
+  height: 100%;
+}
+
 .input-group .form-floating {
   flex: 1;
+}
+
+.input-group .btn {
+  height: 100%;
 }
 
 </style>
@@ -103,32 +115,32 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
     </div>
   
     <!-- 2 Columns Only -->
-    <div class="row g-3">
-      
-      <!-- First Name -->
-      <div class="col-6">
-        <div class="form-floating">
-          <input type="text" id="inp-firstname" class="form-control" placeholder="First Name">
-          <label for="inp-firstname">First Name</label>
-        </div>
+    <div class="row g-3 equal-height">
+
+    <!-- First Name -->
+    <div class="col-6">
+      <div class="form-floating h-100">
+        <input type="text" id="inp-firstname" class="form-control" placeholder="First Name">
+        <label for="inp-firstname">First Name</label>
       </div>
-  
-      <!-- Last Name + Search Button -->
-      <div class="col-6">
-        <div class="input-group">
-          <div class="form-floating">
-            <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name">
-            <label for="inp-lastname">Last Name</label>
-          </div>
-          <button type="button" 
-                  class="btn btn-outline-secondary" 
-                  id="btn-search-name">
-            Search
-          </button>
-        </div>
-      </div>
-  
     </div>
+  
+    <!-- Last Name + Search -->
+    <div class="col-6">
+      <div class="input-group h-100">
+        <div class="form-floating">
+          <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name">
+          <label for="inp-lastname">Last Name</label>
+        </div>
+        <button type="button" 
+                class="btn btn-outline-secondary" 
+                id="btn-search-name">
+          Search
+        </button>
+      </div>
+    </div>
+  
+  </div>
   
   </div>
 
