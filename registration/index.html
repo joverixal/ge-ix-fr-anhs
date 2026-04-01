@@ -259,6 +259,11 @@
 
     <!-- Tab 2: Run Category -->
     <div class="tab-pane" id="tab-ride">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#packagesModal">
+          <i class="bi bi-eye"></i> View Packages
+        </button>
+      </div>
       <div class="mb-3">
         <label class="form-label fw-semibold">3KM</label>
         <div class="d-flex flex-wrap gap-2">
@@ -408,6 +413,116 @@
     </div>
 
   </form>
+</div>
+
+<div class="modal fade" id="packagesModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Run Packages & Inclusions</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- 3KM -->
+        <h6 class="fw-bold text-primary">3KM Category</h6>
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+              <tr>
+                <th></th>
+                <th>Package A</th>
+                <th>Package B</th>
+                <th>Package C</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Early Bird</td>
+                <td>₱200</td>
+                <td>₱350</td>
+                <td>₱300</td>
+              </tr>
+              <tr>
+                <td>T-Shirt</td>
+                <td>—</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Bib Number</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Certificate</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Water & Snacks</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 6KM -->
+        <h6 class="fw-bold text-primary">6KM Category</h6>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+              <tr>
+                <th></th>
+                <th>Package A</th>
+                <th>Package B</th>
+                <th>Package C</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Early Bird</td>
+                <td>₱300</td>
+                <td>₱450</td>
+                <td>₱400</td>
+              </tr>
+              <tr>
+                <td>T-Shirt</td>
+                <td>—</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Bib Number</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Certificate</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Water & Snacks</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Privacy Policy Modal -->
