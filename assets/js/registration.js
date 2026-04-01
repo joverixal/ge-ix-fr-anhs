@@ -193,43 +193,6 @@ $(document).ready(function () {
     });
   }
 
-  function compressImage(file, maxWidth, quality, callback) {
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-        const img = new Image();
-
-        img.onload = function () {
-            let width = img.width;
-            let height = img.height;
-
-            // ✅ Resize if too large
-            if (width > maxWidth) {
-                height = height * (maxWidth / width);
-                width = maxWidth;
-            }
-
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-
-            // ✅ Compress to JPEG (smaller than PNG)
-            const compressedBase64 = canvas
-                .toDataURL('image/jpeg', quality)
-                .split(',')[1];
-
-            callback(compressedBase64);
-        };
-
-        img.src = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-}  
-
   $('input[name="rideCategory"]').on('change', function () {
     const selected = $(this).val();
 
@@ -304,60 +267,6 @@ $(document).ready(function () {
 
     // Update verification link
     $("#verification-link").attr("href", verificationUrl).text("Check Registration Status");
-
-    // Clear previous QR
-    $("#qrcode").empty();
-
-    const qrSize = 200;
-    const margin = 5;
-    const textSpace = 50;
-    const canvasWidth = qrSize + margin * 2;
-    const canvasHeight = qrSize + textSpace + margin * 2;
-
-    // Create main canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-    const ctx = canvas.getContext('2d');
-
-    // White background
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Generate QR using kjua directly on a canvas
-    const qr = kjua({
-        render: 'canvas',
-        crisp: true,
-        size: qrSize,
-        fill: '#000000',
-        back: '#ffffff',
-        quiet: 0,
-        text: JSON.stringify({ id, firstName, lastName})
-    });
-
-    // Draw QR on our main canvas
-    ctx.drawImage(qr, margin, margin, qrSize, qrSize);
-
-    // Draw text
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#000000";
-    ctx.font = "bold 16px Arial";
-    ctx.fillText(eventTitle, canvasWidth / 2, qrSize + margin + 20);
-    ctx.font = "14px Arial";
-    ctx.fillText(fullName, canvasWidth / 2, qrSize + margin + 40);
-
-    // Add canvas to DOM
-    $("#qrcode").append(canvas);
-    $("#qrcode canvas").css({ display: "block", margin: "0 auto" });
-
-    // Download button
-    $("#btn-download-qr").off("click").on("click", function(e) {
-        e.preventDefault();
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL("image/png");
-        link.download = `ANHS_RUN_QR_${fileName}.png`;
-        link.click();
-    });
 }
   
   function getCurrentDateTime() {
