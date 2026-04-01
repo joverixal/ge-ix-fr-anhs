@@ -172,7 +172,6 @@ $(document).ready(function () {
                 alert("Upload failed!");
             }
         });
-    });
   }
 
   $('input[name="rideCategory"]').on('change', function () {
