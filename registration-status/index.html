@@ -41,20 +41,16 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
 #result-qr { display:flex; justify-content:center; align-items:center; margin:20px auto; }
 #result-qr canvas { display:block; max-width:100%; height:auto; }
 
-.row.equal-height {
-  align-items: stretch;
-}
-
-.input-group {
+/* Make form controls full height inside row */
+.row.align-items-stretch .form-floating > .form-control {
   height: 100%;
 }
 
-.input-group .form-floating {
-  flex: 1;
-}
-
-.input-group .btn {
-  height: 100%;
+/* Center the button vertically */
+#btn-search-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 </style>
@@ -104,44 +100,40 @@ body { background: linear-gradient(135deg, #7A2BE2, #00B7C2); min-height: 100vh;
   </div>
     
     <div class="mb-4">
-
     <!-- Scan QR (Top & Centered) -->
     <div class="text-center mb-3">
-      <button type="button" 
-              class="btn register-btn px-4" 
-              id="btn-scan-qr">
+      <button type="button" class="btn register-btn px-4" id="btn-scan-qr">
         Scan QR
       </button>
     </div>
   
-    <!-- 2 Columns Only -->
-    <div class="row g-3 equal-height">
-
-    <!-- First Name -->
-    <div class="col-6">
-      <div class="form-floating h-100">
-        <input type="text" id="inp-firstname" class="form-control" placeholder="First Name">
-        <label for="inp-firstname">First Name</label>
-      </div>
-    </div>
+    <!-- Single Row: First Name | Last Name | Search -->
+    <div class="row g-2 align-items-stretch">
   
-    <!-- Last Name + Search -->
-    <div class="col-6">
-      <div class="input-group h-100">
-        <div class="form-floating">
-          <input type="text" id="inp-lastname" class="form-control" placeholder="Last Name">
+      <!-- First Name -->
+      <div class="col">
+        <div class="form-floating h-100">
+          <input type="text" id="inp-firstname" class="form-control h-100" placeholder="First Name">
+          <label for="inp-firstname">First Name</label>
+        </div>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="col">
+        <div class="form-floating h-100">
+          <input type="text" id="inp-lastname" class="form-control h-100" placeholder="Last Name">
           <label for="inp-lastname">Last Name</label>
         </div>
-        <button type="button" 
-                class="btn btn-outline-secondary" 
-                id="btn-search-name">
+      </div>
+  
+      <!-- Search Button -->
+      <div class="col-auto d-flex">
+        <button type="button" class="btn btn-outline-secondary w-100" id="btn-search-name">
           Search
         </button>
       </div>
+  
     </div>
-  
-  </div>
-  
   </div>
 
     <!-- Registration Details Result -->
