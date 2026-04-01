@@ -190,6 +190,12 @@ $(document).ready(function () {
       $('#p-result-tshirt').addClass('d-none');
     }
 
+    if(data.status == 'Confirmed'){
+      $('#dv-download-qr-code').removeClass('d-none');;
+    }else{
+      $('#dv-download-qr-code').addClass('d-none');;
+    }
+
     const batchYear = data.batchYear || '--';
     
     $('#result-fullname').text(data.firstName + ' ' + data.lastName);
