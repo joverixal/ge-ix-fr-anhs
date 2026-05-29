@@ -1,119 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ge-iX FR App - ANHS 2011</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#E41200">
-<link rel="icon" type="image/png" href="assets/images/app-icon.png">
+    <title>Redirecting...</title>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="assets/vendor/bootstrap-icons.css">
-<!-- Toastr CSS -->
-<link rel="stylesheet" href="assets/vendor/toastr.min.css">
-
-<link rel="stylesheet" href="assets/css/footer.css">
-
-<!-- jQuery -->
-<script src="assets/vendor/jquery.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="assets/vendor/bootstrap.bundle.min.js"></script>
-<!-- Toastr JS -->
-<script src="assets/vendor/toastr.min.js"></script>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/auth.js"></script>
-
-<style>
-body {
-  background-color: #f8f9fa;
-  padding: 20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-
-.login-card {
-  width: 100%;          /* take full width up to max */
-  max-width: 600px;     /* increase max width */
-  min-width: 350px;     /* optional: don't shrink too much */
-  border-radius: 1rem;
-  padding: 2rem;
-  border-top: 5px solid #E41200;
-  background: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* optional: adds subtle shadow */
-  transition: all 0.2s ease-in-out;
-}
-
-@media (min-width: 1200px) {
-  .login-card {
-    max-width: 400px;
-    padding: 3rem;
-  }
-}
-
-.login-logo {
-  width: 90px;
-  margin-bottom: 10px;
-}
-
-.login-title {
-  color: #E41200;
-  font-weight: 700;
-  margin-bottom:1rem;
-}
-
-.login-btn {
-  background-color: #FFA600 !important;
-  color: #fff !important;
-  border:none;
-  font-weight:600;
-  font-size:1.25rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:0.5rem;
-  transition: all 0.15s ease-in-out;
-}
-
-.login-btn:hover{ background:#e69500 !important; }
-.login-btn:active, .login-btn:focus{ background:#cc8400 !important; transform: scale(0.97); }
-.form-floating input { height:50px; font-size:1rem; }
-.form-control:focus { border-color:#FFA600; box-shadow:0 0 0 0.2rem rgba(255,166,0,0.25);}
-</style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 
-<div class="login-card text-center">
-  <img src="assets/images/anhs-2011-logo.png" class="login-logo" alt="ANHS 2011">
-  <h3 class="login-title">ANHS 2011</h3>
-
-  <div class="form-floating mb-3">
-    <input type="text" id="inp-username" class="form-control" placeholder="Username">
-    <label for="inp-username">Username</label>
-  </div>
-
-  <div class="form-floating mb-4">
-    <input type="password" id="inp-password" class="form-control" placeholder="Password">
-    <label for="inp-password">Password</label>
-  </div>
-
-  <button id="btn-login" class="btn login-btn w-100 py-3">
-    <i class="bi bi-box-arrow-in-right me-2"></i> Login
-  </button>
-</div>
-
-<div id="footer-placeholder"></div>
-<script src="assets/js/loadFooter.js"></script>
-
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(()=>console.log("SW registered"))
-    .catch(err=>console.log(err))
-}
+    $(document).ready(function () {
+        window.location.href = "/registration";
+    });
 </script>
 
 </body>
